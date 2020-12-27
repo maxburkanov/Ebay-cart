@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react"
 import './App.scss';
 
-import Items from "./components/Items"
-import Checkout from "./components/Checkout"
+import Items from "./components/Items.tsx"
+import Checkout from "./components/Checkout.tsx"
 
 const APIdata = [
   {

@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from "react";
 
-const Checkout = (props) => {
+const Checkout: React.FC = (props: any) => {
 
   const [sub, setSub] = useState(0)
   const {total} = props  
   useEffect(()=>{
-    const tot = total && total.reduce((acc,el)=>{
+    const tot = total && total.reduce((acc: any, el: any)=>{
       console.log('acc',acc)
       let curr = el.price * el.qty
       acc += curr
@@ -14,14 +14,10 @@ const Checkout = (props) => {
     setSub(tot)
   },[total])
 
-  // console.log('tot', sub)
 
   return (
     <>
       <button className="checkout-button"> Go to checkout </button>
-      {/* {
-        total.map(i => {
-          return ( */}
             <>
               <div className="checkout-info">
                 <div>
@@ -40,10 +36,6 @@ const Checkout = (props) => {
                 <div> ${sub} </div>
               </div>
             </>
-      {/* //     ) 
-      //   })
-      // } */}
-
     </>
   )
 }

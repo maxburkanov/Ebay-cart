@@ -1,8 +1,17 @@
 import React from "react";
 
-const Items = ({data, changeQty}) => {
+interface Item {
+  id: number,
+  name: string,
+  image: string,
+  title: string,
+  qty: number,
+  price: number
+}
+const Items: React.FC = (props: any) => {
 
-  const select = (val) => {
+  const {data, changeQty} = props
+  const select = (val: number) => {
     const arr = [];
     for (let i = 0; i < val; i++) {  
       arr.push(<option key={i+1} value={i+1}> {i+1} </option>)
@@ -10,7 +19,7 @@ const Items = ({data, changeQty}) => {
     return arr
   } 
 
-  const hadleChange = (e) => {
+  const hadleChange = (e: any) => {
     console.log("val",e.target.value)
     changeQty(e.target.value, e.target.name)
   }
@@ -19,7 +28,7 @@ const Items = ({data, changeQty}) => {
   return (
     <>
       {
-        data.map(i => {
+        data.map((i: Item) => {
           return (
             <div className="seller-item">
               <div className="seller-info">
