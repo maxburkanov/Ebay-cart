@@ -1,10 +1,24 @@
 import React, {useState, useEffect} from "react"
 import './App.scss';
 
-import Items from "./components/Items.tsx"
-import Checkout from "./components/Checkout.tsx"
+import Items from "./components/Items"
+import Checkout from "./components/Checkout"
 
-const APIdata = [
+interface Item {
+  id: number,
+  name: string,
+  image: string,
+  title: string,
+  qty: number,
+  price: number
+}
+
+interface Current {
+  name: string,
+  qty: number,
+  price: number
+}
+const APIdata: any = [
   {
     id: 1,
     name: "Nike",
@@ -23,7 +37,7 @@ const APIdata = [
   }
 ] 
 
-function App() {
+const App: React.FC = () => {
   const [data, setData] = useState([])
   const [total, setTotal] = useState([])
 
@@ -32,9 +46,9 @@ function App() {
     .then(res => res.json())
     .then(data => setData(data))
     .catch(() => {
-      setData(APIdata)
-      const obj = APIdata.reduce((acc, el, idx, arr) => {
-        let curr = {"name": el.name, "qty": 1, "price": el.price}
+      setData(APIdata);
+      const obj = APIdata.reduce((acc: any, el: any) => {
+        const curr: Current = {"name": el.name, "qty": 1, "price": el.price}
         acc.push(curr)
         return acc
       }, [])
@@ -42,23 +56,29 @@ function App() {
     });
   }, [])
 
-  const changeQty = (val, name) => {
-    const curr = total.map(i => {
+  const changeQty = (val:any, name:string) => {
+    const curr: any = total.map((i: Current) => {
       if (i.name === name) i.qty = val
       return i
     })
     setTotal(curr)
 
   }
-  
-  console.log('total', total)
+  const props: any = {
+    data: data
+  }
+
+  const totProps: any = {
+    total: total
+  }
+
   return (
     <div className="App">
       <main className="main-items">
-        <Items data={data} changeQty={changeQty}/>
+        <Items {...props} changeQty={changeQty}/>
       </main>
       <aside className="aside-checkout">
-        <Checkout total={total} />
+        <Checkout {...totProps} />
       </aside>
     </div>
   );
