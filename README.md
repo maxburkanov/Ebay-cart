@@ -5,6 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Dependancies
 
 ### `node-sass`
+### `TypeScript`
 If you run into mismatch of sass modules 
 Run:
 ### `npm uninstall node-sass`
